@@ -53,6 +53,7 @@ std::vector<double> getFirstItems(const std::vector<std::vector<double>>& input)
     return result;
 }
 
+// use gregory-newton interpolation to write the equation for the given sequence
 std::string gregoryNewton(std::vector<double> input) {
     std::ostringstream result;  
 
@@ -99,14 +100,9 @@ std::string gregoryNewton(std::vector<double> input) {
     return result.str();
 }
 
-int main() {
-    // Vector to store the parsed numbers
-    std::vector<double> numbers;
-    // Vector to store the differences
-    std::vector<std::vector<double> > differences;
 
-    
-    // Read stdin into a string
+// allow the input string to be separated by spaces or commas
+void parseInput(std::vector<double>& numbers) {
     std::string input;
     std::string line;
     while (std::getline(std::cin, line)) {
@@ -120,20 +116,15 @@ int main() {
         }
     }
     
-    // Use a stringstream to parse the numbers
     std::stringstream ss(input);
     double number;
-    
-    // Extract numbers from the stringstream and add them to the vector
     while (ss >> number) {
         numbers.push_back(number);
     }
-   
-    // Generate Diferences
-    differences = generateDifferences(numbers);
+}
 
-
-    // Print the numbers
+// display the input
+void printParsedNumbers(const std::vector<double>& numbers) {
     std::cout << "Parsed numbers:" << std::endl;
     for (size_t i = 0; i < numbers.size(); i++) {
         std::cout << numbers[i];
@@ -142,16 +133,16 @@ int main() {
         }
     }
     std::cout << std::endl;
-    
-    // Print the differences table
+}
+
+// display the difference table
+void printDifferencesTable(const std::vector<std::vector<double>>& differences) {
     std::cout << "\nDifferences table:" << std::endl;
     for (size_t i = 0; i < differences.size(); ++i) {
-        // Add indentation for each level
         for (size_t indent = 0; indent < i; ++indent) {
-            std::cout << "  ";  // Two spaces for each level
+            std::cout << "  ";
         }
         
-        // Print the row
         for (size_t j = 0; j < differences[i].size(); ++j) {
             std::cout << differences[i][j];
             if (j < differences[i].size() - 1) {
@@ -160,9 +151,18 @@ int main() {
         }
         std::cout << std::endl;
     }
+}
 
-    std::cout << "\nGregory Newton Formula: (maxima definition)\n f(n) := " << gregoryNewton(getFirstItems(differences)) << ";" << std::endl;
+int main() {
+    std::vector<double> numbers;
+    parseInput(numbers);
     
+    auto differences = generateDifferences(numbers);
+    
+    printParsedNumbers(numbers);
+    printDifferencesTable(differences);
+   
+    std::cout << "\nGregory Newton Formula: (maxima definition)\n f(n) := " << gregoryNewton(getFirstItems(differences)) << ";" << std::endl;
     return 0;
 }
 
