@@ -85,12 +85,10 @@ std::string gregoryNewton(std::vector<double> input) {
                     result << "(n - " << j << ")";
                 }
             }
-            if (i > 0) {
-                if (input[i] == 1) {
-                    result << ")";
-                } else {
-                    result << " * " << input[i] << ")";
-                }
+            if (input[i] == 1) {
+                result << ")";
+            } else {
+                result << " * " << input[i] << ")";
             }
             
             // Denominator part: i!
@@ -156,6 +154,12 @@ void printDifferencesTable(const std::vector<std::vector<double>>& differences) 
 int main() {
     std::vector<double> numbers;
     parseInput(numbers);
+    
+    if (numbers.empty()) {
+        std::cerr << "Error: no valid numbers provided\n";
+        std::cerr << "Usage: echo \"1, 2, 4, 8\" | " << "gregory_newton\n";
+        return 1;
+    }
     
     auto differences = generateDifferences(numbers);
     
