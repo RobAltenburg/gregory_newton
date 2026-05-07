@@ -21,16 +21,16 @@ echo "-7, -2, 5, 14, 25, 38, 53, 70" | ./build/gregory_newton
 Output:
 
 ```
-Parsed numbers:<br/>
-<pre>-7, -2, 5, 14, 25, 38, 53, 70</pre>
+Parsed numbers:
+-7, -2, 5, 14, 25, 38, 53, 70
 
-Differences table:</br>
-<pre>-7 -2 5 14 25 38 53 70
+Differences table:
+-7 -2 5 14 25 38 53 70
   5 7 9 11 13 15 17
-    2 2 2 2 2 2</pre>
+    2 2 2 2 2 2
 
-Gregory Newton Formula: (maxima definition)<br/>
-<pre>f(n) := -7 + 5 * n + (n * (n - 1) * 2) / 2!;</pre>
+Gregory Newton Formula: (maxima definition)
+f(n) := -7 + 5 * n + (n * (n - 1) * 2) / 2!;
 ```
 
 ## Test
